@@ -1,7 +1,7 @@
 FROM alpine:3.7
 MAINTAINER Richard Boyd II <me@richardboydii.com>
 
-ENV HUGO_VER 0.37.1
+ENV HUGO_VER 0.41
 
 # Install bash and git
 RUN apk update && apk add bash git && rm -rf /var/cache/apk/*
