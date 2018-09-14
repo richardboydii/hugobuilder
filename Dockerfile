@@ -1,7 +1,7 @@
-FROM alpine:3.7
-MAINTAINER Richard Boyd II <me@richardboydii.com>
+FROM alpine:3.8
+MAINTAINER Richard Boyd II <mail@richardboydii.com>
 
-ENV HUGO_VER 0.41
+ENV HUGO_VER 0.48
 
 # Install bash and git
 RUN apk update && apk add bash git && rm -rf /var/cache/apk/*
@@ -21,4 +21,4 @@ VOLUME /project
 WORKDIR /project
 EXPOSE 1313
 ENTRYPOINT ["hugo"]
-CMD ["-v", "-d", "/project/build"]
+CMD ["-v", "-s", "src", "-d", "/project/build"]
