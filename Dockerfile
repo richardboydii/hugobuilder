@@ -1,10 +1,13 @@
-FROM alpine:3.8
+FROM python:3.7.2-alpine3.8
 MAINTAINER Richard Boyd II <mail@richardboydii.com>
 
-ENV HUGO_VER 0.48
+ENV HUGO_VER 0.53
 
 # Install bash and git
 RUN apk update && apk add bash git && rm -rf /var/cache/apk/*
+
+# Install the AWS CLI
+RUN pip install awscli 
 
 # Create a local dir for Hugo, download and install
 RUN mkdir /usr/local/hugo
@@ -16,9 +19,3 @@ RUN tar xzf /usr/local/hugo/hugo_${HUGO_VER}_linux-64bit.tar.gz -C /usr/local/hu
 # Create a volume to hold the host project
 RUN mkdir -p /project
 VOLUME /project
-
-# Set the workdir, entrypoint, and command to use the container
-WORKDIR /project
-EXPOSE 1313
-ENTRYPOINT ["hugo"]
-CMD ["-v", "-s", "src", "-d", "/project/build"]
